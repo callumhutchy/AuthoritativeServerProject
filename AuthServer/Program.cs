@@ -2,6 +2,7 @@
 using System.Net.Sockets;
 using System.Threading;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using ENet;
 using MessagePack;
 
@@ -11,7 +12,7 @@ namespace AuthServer
     {
         public static List<PlayerInfo> playerList = new List<PlayerInfo>();
 
-        public static List<Tuple<Data, Peer>> queue = new List<Tuple<Data,Peer>>();
+        public static  ConcurrentQueue<Tuple<Data, Peer>> queue = new ConcurrentQueue<Tuple<Data,Peer>>();
 
         static bool isRunning = false;
 
@@ -78,8 +79,8 @@ namespace AuthServer
                                 netEvent.Packet.Dispose();
 
                                 Data data = MessagePackSerializer.Deserialize<Data>(buffer);
-                                
-                                queue.Add(new Tuple<Data,Peer>(data,netEvent.Peer));
+                                Console.WriteLine("Content " + data.command + " " + data.content);
+                                queue.Enqueue(new Tuple<Data,Peer>(data,netEvent.Peer));
                                 break;
                         }
                     }
@@ -98,8 +99,8 @@ namespace AuthServer
         static void ProcessQueue(){
             while(isRunning){
                 if(queue.Count > 0){
-                    Tuple<Data, Peer> data = queue[0];
-                    queue.RemoveAt(0);
+                    Tuple<Data, Peer> data;
+                    queue.TryDequeue(out data);
                     Data newMsg;
 
                     if(data == null){
