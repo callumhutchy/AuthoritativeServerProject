@@ -30,7 +30,7 @@ namespace AuthClient
 
                 string input = Console.ReadLine();
 
-                Send(new Tuple<Data,Peer>(new Data(){command = Command.TEST_MESSAGE, content = input, clientId = clientId}, peer));
+                Send(new Tuple<Data,Peer>(new Data(){command = Command.MOVEMENT_UPDATE, content = input, clientId = clientId}, peer));
                 
 
             }

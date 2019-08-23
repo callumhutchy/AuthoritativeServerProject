@@ -9,7 +9,7 @@ namespace AuthServer
     {
         public Peer client;
         public String userId;
-        public float speed;
-        public Vector3 lastPosition;
+        public float speed = 1;
+        public Vector3 lastPosition = new Vector3(0,0,0);
     }
 }

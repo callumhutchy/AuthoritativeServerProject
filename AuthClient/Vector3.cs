@@ -1,7 +1,5 @@
 using System;
 
-namespace AuthServer
-{
     public class Vector3
     {
         public float x {get;set;}
@@ -40,4 +38,3 @@ namespace AuthServer
             return new Vector3(v.x*f, v.y*f, v.z*f);
         }
     }
-}
