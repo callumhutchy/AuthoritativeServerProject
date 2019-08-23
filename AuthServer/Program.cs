@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Concurrent;
 using ENet;
 using MessagePack;
+using System.Linq;
 
 namespace AuthServer
 {
@@ -12,9 +13,11 @@ namespace AuthServer
     {
         public static List<PlayerInfo> playerList = new List<PlayerInfo>();
 
-        public static  ConcurrentQueue<Tuple<Data, Peer>> queue = new ConcurrentQueue<Tuple<Data,Peer>>();
-
+        public static   ConcurrentQueue<Tuple<Data, Peer>> queue = new ConcurrentQueue<Tuple<Data,Peer>>();
+        public static   ConcurrentQueue<String> logQueue = new ConcurrentQueue<String>();
         static bool isRunning = false;
+
+        static float clientTickRate = 0.03f;
 
         static void Main(string[] args)
         {
@@ -22,10 +25,12 @@ namespace AuthServer
 
             if(!isRunning){
                 isRunning = true;
+                Thread logger = new Thread(new ThreadStart(LoggerProcessor));
                 Thread mainListener = new Thread(new ThreadStart(MainListener));
                 Thread processQueue = new Thread(new ThreadStart(ProcessQueue));
                 Thread broadcastPositions = new Thread(new ThreadStart(BroadcastPositions));
 
+                logger.Start();
                 mainListener.Start();
                 processQueue.Start();
                 broadcastPositions.Start();
@@ -35,7 +40,7 @@ namespace AuthServer
         }
 
         static void MainListener(){
-            Console.WriteLine("Starting Server");
+            Log("Starting Server");
             ENet.Library.Initialize();
             using(Host server = new Host()){
                 Address address = new Address();
@@ -60,26 +65,27 @@ namespace AuthServer
                                 break;
                             case ENet.EventType.Connect:
                                 //Connection attempt
-                                Console.WriteLine("Client connected - ID: " + netEvent.Peer.ID + ", IP: " + netEvent.Peer.IP);
+                                Log("Client connected - ID: " + netEvent.Peer.ID + ", IP: " + netEvent.Peer.IP);
 
                                 //Send connection accept message
-
+                                playerList.Add(new PlayerInfo(){client = netEvent.Peer});
                                 break;
                             case ENet.EventType.Disconnect:
-                                Console.WriteLine("Client disconnected - ID: " + netEvent.Peer.ID + ", IP: " + netEvent.Peer.IP);
+                                Log("Client disconnected - ID: " + netEvent.Peer.ID + ", IP: " + netEvent.Peer.IP);
+                                
+                                playerList.Remove(playerList.Where(x => x.client.ID.Equals(netEvent.Peer.ID)).First());
                                 break;
                             case ENet.EventType.Timeout:
-                                Console.WriteLine("Client timeout - ID: " + netEvent.Peer.ID + ", IP: " + netEvent.Peer.IP);
+                                Log("Client timeout - ID: " + netEvent.Peer.ID + ", IP: " + netEvent.Peer.IP);
                                 break;
                             case ENet.EventType.Receive:
-                                Console.WriteLine("Packet received from - ID: " + netEvent.Peer.ID + ", IP: " + netEvent.Peer.IP);
+                                Log("Packet received from - ID: " + netEvent.Peer.ID + ", IP: " + netEvent.Peer.IP);
                                 
                                 byte[] buffer = new byte[netEvent.Packet.Length];
                                 netEvent.Packet.CopyTo(buffer);
                                 netEvent.Packet.Dispose();
 
                                 Data data = MessagePackSerializer.Deserialize<Data>(buffer);
-                                Console.WriteLine("Content " + data.command + " " + data.content);
                                 queue.Enqueue(new Tuple<Data,Peer>(data,netEvent.Peer));
                                 break;
                         }
@@ -104,21 +110,31 @@ namespace AuthServer
                     Data newMsg;
 
                     if(data == null){
-                        Console.WriteLine("data is null uh oh");
+                        Log("data is null uh oh");
                     }
 
                     switch(data.Item1.command){
                         case Command.LOGIN:
-
+                            playerList.Where(x => x.client.Equals(data.Item2)).First().userId = data.Item1.clientId;
                             break;
                         case Command.MOVEMENT_UPDATE:
-
+                            PlayerInfo pi = playerList.Where(x => x.client.Equals(data.Item2)).First();
+                            Vector3 newPos = Vector3.Deserialise(data.Item1.content);
+                            if((((newPos - pi.lastPosition).magnitude()) / clientTickRate) <= pi.speed){
+                                playerList.Where(x => x.client.Equals(data.Item2)).First().lastPosition = newPos;
+                            }else{
+                                float distance = pi.speed * clientTickRate;
+                                Vector3 directionTravel = newPos - pi.lastPosition;
+                                Vector3 finalDirection = directionTravel + (directionTravel.normalized() * distance);
+                                Vector3 targetPosition = pi.lastPosition + finalDirection;
+                                playerList.Where(x => x.client.Equals(data.Item2)).First().lastPosition = targetPosition;
+                            }
                             break;
                         case Command.DISCONNECT:
 
                             break;
                         case Command.TEST_MESSAGE:
-                            Console.WriteLine("Received test message: " + data.Item1.content);
+                            Log("Received test message from " + data.Item1.clientId + " : " + data.Item1.content);
                             newMsg = new Data(){command = Command.TEST_MESSAGE, content = "Cheers we received it"};
                             Send(new Tuple<Data,Peer>(newMsg,data.Item2));
                             break;
@@ -132,7 +148,39 @@ namespace AuthServer
         }
 
         static void BroadcastPositions(){
+            while(isRunning){
 
+                Data message = new Data(){
+                    command = Command.PLAYER_POSITION_UPDATE,
+                    content = "",
+                    sendTime = DateTime.UtcNow,
+                    positions = new List<string>()
+                };
+
+                foreach(PlayerInfo pi in playerList){
+                    message.positions.Add(pi.userId + "/" + pi.lastPosition.x + "/" + pi.lastPosition.y + "/"+pi.lastPosition.z);
+                }
+
+                foreach(PlayerInfo pi in playerList){
+                    Send(new Tuple<Data, Peer>(message, pi.client));
+                }
+
+                Thread.Sleep(100);
+            }
+        }
+
+        static void Log(string message){
+            logQueue.Enqueue(message);
+        }
+
+        static void LoggerProcessor(){
+            while(isRunning){
+                if(logQueue.Count > 0){
+                    string temp = "";
+                    logQueue.TryDequeue(out temp);
+                    Console.WriteLine(temp);
+                }
+            }
         }
     }
 }

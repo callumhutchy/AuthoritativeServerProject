@@ -1,5 +1,6 @@
 using MessagePack;
 using System;
+using System.Collections.Generic;
 
     [MessagePackObject]
     public class Data
@@ -16,6 +17,8 @@ using System;
         [Key(3)]
         public string clientId {get; set;}
 
+        [Key(4)]
+        public List<string> positions {get; set;}
 
     }
 

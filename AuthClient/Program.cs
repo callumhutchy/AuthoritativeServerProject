@@ -24,7 +24,7 @@ namespace AuthClient
 
             connectionLoop.Start();
             receiveQueue.Start();
-/*
+
             while(isRunning){
                 Console.WriteLine("Accepting input");
 
@@ -34,13 +34,14 @@ namespace AuthClient
                 
 
             }
-*/
+
 
 Thread.Sleep(1000);
-
+/*
 for(int i = 0; i < 20; i++){
     Send(new Tuple<Data, Peer>(new Data(){command = Command.TEST_MESSAGE, content = "Message " + i, clientId = clientId}, peer));
 }
+*/
         }
 
         static void Send(Tuple<Data,Peer> tuple){

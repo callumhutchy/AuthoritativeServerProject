@@ -12,3 +12,17 @@ F:\Programming\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\Aut
 F:\Programming\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.AssemblyInfo.cs
 F:\Programming\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.dll
 F:\Programming\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.pdb
+X:\source\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\enet.dll
+X:\source\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\enet.dylib
+X:\source\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\libenet.so
+X:\source\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\AuthServer.deps.json
+X:\source\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\AuthServer.runtimeconfig.json
+X:\source\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\AuthServer.runtimeconfig.dev.json
+X:\source\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\AuthServer.dll
+X:\source\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\AuthServer.pdb
+X:\source\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.csprojAssemblyReference.cache
+X:\source\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.csproj.CoreCompileInputs.cache
+X:\source\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.AssemblyInfoInputs.cache
+X:\source\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.AssemblyInfo.cs
+X:\source\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.dll
+X:\source\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.pdb

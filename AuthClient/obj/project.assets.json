@@ -1819,24 +1819,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\callu\\.nuget\\packages\\": {},
+    "C:\\Users\\callum.hutchinson\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Programming\\AuthoritativeServerProject\\AuthClient\\AuthClient.csproj",
+      "projectUniqueName": "x:\\source\\AuthoritativeServerProject\\AuthClient\\AuthClient.csproj",
       "projectName": "AuthClient",
-      "projectPath": "F:\\Programming\\AuthoritativeServerProject\\AuthClient\\AuthClient.csproj",
-      "packagesPath": "C:\\Users\\callu\\.nuget\\packages\\",
-      "outputPath": "F:\\Programming\\AuthoritativeServerProject\\AuthClient\\obj\\",
+      "projectPath": "x:\\source\\AuthoritativeServerProject\\AuthClient\\AuthClient.csproj",
+      "packagesPath": "C:\\Users\\callum.hutchinson\\.nuget\\packages\\",
+      "outputPath": "x:\\source\\AuthoritativeServerProject\\AuthClient\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\callu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\callum.hutchinson\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
@@ -1868,6 +1871,7 @@
             "version": "[1.7.3.7, )"
           },
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
