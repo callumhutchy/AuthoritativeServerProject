@@ -17,9 +17,11 @@ namespace AuthServer {
 
         static float clientTickRate = 0.03f;
 
+
         static void Main (string[] args) {
 
             if (!isRunning) {
+                AppDomain.CurrentDomain.ProcessExit += (sender, eventArgs) => Program.isRunning = false;
                 isRunning = true;
                 Thread logger = new Thread (new ThreadStart (LoggerProcessor));
                 Thread mainListener = new Thread (new ThreadStart (MainListener));
@@ -38,14 +40,16 @@ namespace AuthServer {
         static void MainListener () {
             Log ("Starting Server");
             if (ENet.Library.Initialize ()) {
+                Log("Enet inited");
                 using (Host server = new Host ()) {
                     Address address = new Address ();
                     address.Port = 7995;
                     server.Create (address, 1000);
-
+                    Log("Created server");
                     ENet.Event netEvent;
 
                     while (isRunning) {
+
                         bool polled = false;
                         while (!polled) {
                             if (server.CheckEvents (out netEvent) <= 0) {
@@ -73,6 +77,7 @@ namespace AuthServer {
                                     break;
                                 case ENet.EventType.Timeout:
                                     Log ("Client timeout - ID: " + netEvent.Peer.ID + ", IP: " + netEvent.Peer.IP);
+                                    playerList.Remove(playerList.Where(x => x.client.Equals(netEvent.Peer)).First());
                                     break;
                                 case ENet.EventType.Receive:
                                     Log ("Packet received from - ID: " + netEvent.Peer.ID + ", IP: " + netEvent.Peer.IP);
@@ -96,9 +101,6 @@ namespace AuthServer {
             }
         }
     
-
-        
-
         static void Send (Tuple<Data, Peer> tuple) {
             Packet packet = default (Packet);
             byte[] message = MessagePackSerializer.Serialize (tuple.Item1);
@@ -119,7 +121,9 @@ namespace AuthServer {
 
                     switch (data.Item1.command) {
                         case Command.LOGIN:
+                            Log("Client wants to login with id: " + data.Item1.clientId);
                             playerList.Where (x => x.client.Equals (data.Item2)).First ().userId = data.Item1.clientId;
+                            Send(new Tuple<Data, Peer>(new Data(){command = Command.CONNECTED}, data.Item2));
                             break;
                         case Command.MOVEMENT_UPDATE:
                             PlayerInfo pi = playerList.Where (x => x.client.Equals (data.Item2)).First ();
@@ -127,11 +131,12 @@ namespace AuthServer {
                             if ((((newPos - pi.lastPosition).magnitude ()) / clientTickRate) <= pi.speed) {
                                 playerList.Where (x => x.client.Equals (data.Item2)).First ().lastPosition = newPos;
                             } else {
-                                Log (pi.userId + " has moved further than they should");
+                                //Log (pi.userId + " has moved further than they should");
                                 float distance = pi.speed * clientTickRate;
                                 Vector3 directionTravel = newPos - pi.lastPosition;
                                 Vector3 finalDirection = directionTravel + (directionTravel.normalized () * distance);
                                 Vector3 targetPosition = pi.lastPosition + finalDirection;
+                                Log("targetposition " + targetPosition.ToString());
                                 playerList.Where (x => x.client.Equals (data.Item2)).First ().lastPosition = targetPosition;
                             }
                             break;

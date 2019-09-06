@@ -26,3 +26,17 @@ X:\source\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServ
 X:\source\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.AssemblyInfo.cs
 X:\source\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.dll
 X:\source\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.pdb
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\enet.dll
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\enet.dylib
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\libenet.so
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\AuthServer.deps.json
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\AuthServer.runtimeconfig.json
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\AuthServer.runtimeconfig.dev.json
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\AuthServer.dll
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\bin\Debug\netcoreapp2.1\AuthServer.pdb
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.csprojAssemblyReference.cache
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.csproj.CoreCompileInputs.cache
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.AssemblyInfoInputs.cache
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.AssemblyInfo.cs
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.dll
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthServer\obj\Debug\netcoreapp2.1\AuthServer.pdb

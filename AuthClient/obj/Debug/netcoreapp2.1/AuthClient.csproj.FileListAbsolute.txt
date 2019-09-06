@@ -26,3 +26,17 @@ X:\source\AuthoritativeServerProject\AuthClient\obj\Debug\netcoreapp2.1\AuthClie
 X:\source\AuthoritativeServerProject\AuthClient\obj\Debug\netcoreapp2.1\AuthClient.AssemblyInfo.cs
 X:\source\AuthoritativeServerProject\AuthClient\obj\Debug\netcoreapp2.1\AuthClient.dll
 X:\source\AuthoritativeServerProject\AuthClient\obj\Debug\netcoreapp2.1\AuthClient.pdb
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\bin\Debug\netcoreapp2.1\enet.dll
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\bin\Debug\netcoreapp2.1\enet.dylib
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\bin\Debug\netcoreapp2.1\libenet.so
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\bin\Debug\netcoreapp2.1\AuthClient.deps.json
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\bin\Debug\netcoreapp2.1\AuthClient.runtimeconfig.json
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\bin\Debug\netcoreapp2.1\AuthClient.runtimeconfig.dev.json
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\bin\Debug\netcoreapp2.1\AuthClient.dll
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\bin\Debug\netcoreapp2.1\AuthClient.pdb
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\obj\Debug\netcoreapp2.1\AuthClient.csprojAssemblyReference.cache
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\obj\Debug\netcoreapp2.1\AuthClient.csproj.CoreCompileInputs.cache
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\obj\Debug\netcoreapp2.1\AuthClient.AssemblyInfoInputs.cache
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\obj\Debug\netcoreapp2.1\AuthClient.AssemblyInfo.cs
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\obj\Debug\netcoreapp2.1\AuthClient.dll
+C:\Users\callu\Documents\Programming\AuthoritativeServerProject\AuthClient\obj\Debug\netcoreapp2.1\AuthClient.pdb

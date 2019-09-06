@@ -23,6 +23,10 @@ namespace AuthServer
             return new Vector3(x / mag, y/mag, z / mag);
         }
 
+        public override string ToString(){
+            return x + "/" + y + "/" + z;
+        }
+
         public static Vector3 Deserialise(string pos){
             string[] temp = pos.Split('/');
             return new Vector3(float.Parse(temp[0]),float.Parse(temp[1]),float.Parse(temp[2]));
