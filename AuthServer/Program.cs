@@ -15,7 +15,7 @@ namespace AuthServer {
         public static ConcurrentQueue<String> logQueue = new ConcurrentQueue<String> ();
         static bool isRunning = false;
 
-        static float clientTickRate = 0.03f;
+        static float clientTickRate = 0.06f;
 
 
         static void Main (string[] args) {
@@ -80,7 +80,7 @@ namespace AuthServer {
                                     playerList.Remove(playerList.Where(x => x.client.Equals(netEvent.Peer)).First());
                                     break;
                                 case ENet.EventType.Receive:
-                                    Log ("Packet received from - ID: " + netEvent.Peer.ID + ", IP: " + netEvent.Peer.IP);
+                                   // Log ("Packet received from - ID: " + netEvent.Peer.ID + ", IP: " + netEvent.Peer.IP);
 
                                     byte[] buffer = new byte[netEvent.Packet.Length];
                                     netEvent.Packet.CopyTo (buffer);
@@ -128,15 +128,29 @@ namespace AuthServer {
                         case Command.MOVEMENT_UPDATE:
                             PlayerInfo pi = playerList.Where (x => x.client.Equals (data.Item2)).First ();
                             Vector3 newPos = Vector3.Deserialise (data.Item1.content);
-                            if ((((newPos - pi.lastPosition).magnitude ()) / clientTickRate) <= pi.speed) {
+
+                            float magnitude = (newPos - pi.lastPosition).magnitude();
+                            //Log("Magnitude : " + magnitude);
+                            float speed = magnitude / clientTickRate;
+                            //Log("Speed : " + speed);
+                            
+                            if (speed <= pi.speed) {
                                 playerList.Where (x => x.client.Equals (data.Item2)).First ().lastPosition = newPos;
                             } else {
+                                //Log("Position needs correcting");
                                 //Log (pi.userId + " has moved further than they should");
                                 float distance = pi.speed * clientTickRate;
+                               // Log("Distance achievable : " + distance);
                                 Vector3 directionTravel = newPos - pi.lastPosition;
-                                Vector3 finalDirection = directionTravel + (directionTravel.normalized () * distance);
+                                //Log("Direction of travel : " + directionTravel.ToString());
+                                Vector3 directionNormalised = directionTravel.normalized();
+                                //Log("Direction normalised : " + directionNormalised.ToString());
+                                
+                                Vector3 finalDirection =(directionNormalised * distance);
+                                
                                 Vector3 targetPosition = pi.lastPosition + finalDirection;
-                                Log("targetposition " + targetPosition.ToString());
+                                //Log("givenposition " + pi.lastPosition.ToString());
+                                //Log("targetposition " + targetPosition.ToString());
                                 playerList.Where (x => x.client.Equals (data.Item2)).First ().lastPosition = targetPosition;
                             }
                             break;

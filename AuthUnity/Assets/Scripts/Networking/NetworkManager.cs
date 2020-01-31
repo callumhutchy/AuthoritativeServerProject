@@ -23,10 +23,10 @@ public class NetworkManager : MonoBehaviour
             List<string> tempPos = newPositions;
             
             foreach(string s in tempPos){
-                Debug.Log(s);
+                //Debug.Log(s);
                 string[] split = s.Split('/');
                 string id = split[0];
-                Debug.Log(id);
+                //Debug.Log(id);
                 Vector3 pos = new Vector3(float.Parse(split[1]), float.Parse(split[2]), float.Parse(split[3]));
                 GameObject.Find(id).transform.position = pos;
             }

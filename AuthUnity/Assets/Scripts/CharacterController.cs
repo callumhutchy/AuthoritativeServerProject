@@ -12,14 +12,14 @@ public class CharacterController : MonoBehaviour
         Move();
     }
 
-    public int speed = 1;
+    public float speed = 1f;
 
     public void Move()
     {
 
-        Vector3 Movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-        transform.position += Movement * speed * Time.deltaTime;
+        transform.position += movement * speed * Time.deltaTime;
 
     }
 }
